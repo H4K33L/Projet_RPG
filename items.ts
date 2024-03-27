@@ -4,10 +4,11 @@ export default class item {
     quantity: number;
     rez: number;
     healType: string;
+    healMana : number;
     // useVerification: boolean; faire fonction de use
     name: string
 
-    constructor(heal: number, quantity: number, rez : number, healType: string, name: string) {
+    constructor(heal: number, quantity: number, rez : number, healType: string,healMana:number, name: string) {
         this.heal = heal;
         this.quantity = quantity
         this.rez = rez

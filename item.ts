@@ -4,10 +4,10 @@ import rez from "./rez.ts"
 import healer from "./healer.ts"
 import mana from "./mana.ts"
 
-const Potion = new healer(50,2,0,"health","Potion 🧪")
-const Morceau_Étoile = new rez(50,1,20,"rez or heal","Morceau d'étoile ✨")
-const Demi_Étoile = new rez(100,0,100,"rez or heal","Demi-étoile 🌟")
-const Ether = new mana(0,1,0,"mana","Ether 💊")
+const Potion = new healer(50,2,0,"health",0,"Potion 🧪")
+const Morceau_Étoile = new rez(50,1,20,"rez or heal",0,"Morceau d'étoile ✨")
+const Demi_Étoile = new rez(100,0,100,"rez or heal",0,"Demi-étoile 🌟")
+const Ether = new mana(0,1,0,"mana",30,"Ether 💊")
 
 
 
