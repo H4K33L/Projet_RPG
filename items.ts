@@ -1,31 +1,18 @@
+import Character from "./Character.ts";
 export default class item {
     heal: number; // pourcentage de heal = 20
     quantity: number;
-    type: number;
-    healType: number;
-    target: boolean;
-    useVerification: boolean;
+    rez: number;
+    healType: string;
+    // useVerification: boolean; faire fonction de use
     name: string
 
-    constructor(heal: number, quantity: number, type: number, healType: number, target: boolean, useVerification: boolean, name: string) {
+    constructor(heal: number, quantity: number, rez : number, healType: string, name: string) {
         this.heal = heal;
         this.quantity = quantity
-        this.type = type
+        this.rez = rez
         this.healType = healType
-        this.target = target
-        this.useVerification = useVerification
         this.name = name
 
     }
-
-    useHeal(heal: number, character: Caracter) {
-        if (character.alive) {
-            character.heal
-
-
-        } 
-        else (character.alive)
-            character.rez
-        }
-    }
-
+}
