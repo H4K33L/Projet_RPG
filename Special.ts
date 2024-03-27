@@ -1,4 +1,4 @@
-import Character from "../Character.ts"
+import Character from "./Character.ts"
 
 export default interface Special {
     specialAction(targets : Character[]):void 

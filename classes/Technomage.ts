@@ -1,5 +1,5 @@
 import Character from "../Character.ts"
-import Special from "./Special.ts"
+import Special from "../Special.ts"
 
 export default class TechnoMage extends Character implements Special{
     protected currentQuantum : number
@@ -10,7 +10,7 @@ export default class TechnoMage extends Character implements Special{
     }
 
     constructor(){
-        super('Techno-Mage',10,30,10,0,50,60,' ☼  \n_☺_ \n|:=¤\n/:\\ \n')
+        super('Techno-Mage',10,30,10,30,50,60,' ☼  \n_☺_ \n|:=¤\n/:\\ \n')
         this.currentQuantum = 100
         this.maximumQantum = 100
         this._AOESpecialAction = false

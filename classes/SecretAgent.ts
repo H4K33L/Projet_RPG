@@ -1,5 +1,5 @@
 import Character from "../Character.ts"
-import Special from "./Special.ts"
+import Special from "../Special.ts"
 
 export default class Secretagent extends Character implements Special{
     protected _AOESpecialAction : boolean
