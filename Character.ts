@@ -1,22 +1,41 @@
-export default class Character {
-    public name : string
+export default abstract class Character {
     protected kineticStrike : number
     protected energeticalStrike : number
     protected KAC : number
     protected EAC : number
     protected speed : number
-    public actionValue : 0
-    protected maximumHitPoint : number
+    protected readonly maximumHitPoint : number
     protected currentHitPoint : number
-    public alive : boolean
-    public emoji : string
-    public specialAction : boolean
+    //
+    public get _currentHitPoint() {
+        return this.currentHitPoint
+    }
+    //
+    protected _name : string
+    public get name() {
+        return this._name
+    }
+    protected _alive : boolean
+    public get alive() {
+        return this._alive
+    }
+    protected _emoji : string
+    public get emoji() {
+        return this._emoji
+    }
+    
+    private _actionValue : number
+    public get actionValue() {
+        return this._actionValue
+    }
+    public set actionValue(Value){
+        this._actionValue = Math.min(0,this._actionValue-Value)
+    }
 
-    constructor(name : string, kineticStrike : number,enrgeticalStrike : number,
+    protected constructor(name : string, kineticStrike : number,enrgeticalStrike : number,
                 KAC : number,EAC : number,speed : number,
-                maximumHitPoint : number,emoji : string,
-                specialAction : boolean){
-        this.name = name
+                maximumHitPoint : number,emoji : string,){
+        this._name = name
         this.kineticStrike = kineticStrike
         this.energeticalStrike = enrgeticalStrike
         this.KAC = KAC
@@ -24,41 +43,40 @@ export default class Character {
         this.speed = speed
         this.maximumHitPoint = maximumHitPoint
         this.currentHitPoint = maximumHitPoint
-        this.alive = true
-        this.emoji = emoji
-        this.specialAction = specialAction
+        this._alive = true
+        this._emoji = emoji
     }
 
-    arm(value : number, type : string){
+    public arm(value : number, type : string){
         if (type === "K") {
             this.currentHitPoint = Math.max(0, this.currentHitPoint - Math.max(0, value - this.KAC))
         } else {
             this.currentHitPoint = Math.max(0, this.currentHitPoint - Math.max(0, value - this.EAC))
         }
         if (this.currentHitPoint === 0){
-            this.alive = false
+            this._alive = false
         }
     }
 
-    heal(percent : number){
-        if (this.alive === true){
+    public heal(percent : number){
+        if (this._alive === true){
             this.currentHitPoint = Math.min(this.maximumHitPoint, this.currentHitPoint + (this.maximumHitPoint*(percent/100)))
         }
     }
 
-    rez(percent : number){
-        if (this.alive === false){
+    public rez(percent : number){
+        if (this._alive === false){
             this.currentHitPoint = Math.min(this.maximumHitPoint, this.currentHitPoint + (this.maximumHitPoint*(percent/100)))
         }
     }
 
-    attack(targets: Character[]){
+    public attack(targets: Character[]){
         targets.forEach(target => {
             target.arm(this.kineticStrike,'K')
         })
     }
 
-    special(targets : Character[]){
-        /* epty method who is fill in herited class */
+    public AV() {
+        this._actionValue = Math.round(10000/this.speed)
     }
 }
