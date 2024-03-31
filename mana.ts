@@ -6,8 +6,8 @@ export default class mana extends items {
         super(heal,quantity,rez,healType,healMana,name);
     }
 
-    useHealMana(healMana: number, technoMage: Character) {
-        technoMage.healMana(healMana)
+    useHealMana(healQuantum: number, technoMage: Character) {
+        technoMage.healMana(healQuantum)
     }
 }
 
