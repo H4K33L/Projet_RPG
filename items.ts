@@ -8,13 +8,10 @@ export default class item {
     private name: string
 
     public get _quantity () {
-        return this._quantity
+        return this.quantity
     }
-
-    public set _quantity (quantity){
-            this._quantity = quantity
-
-
+    public set _quantity (input){
+            this.quantity = input
     }
 
     protected constructor(heal: number, quantity: number, rez : number, healType: string,healMana:number, name: string) {
