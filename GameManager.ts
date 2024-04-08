@@ -9,7 +9,7 @@ import Character from "./Character.ts";
 
 export default class GameManager{
     protected characters : Character[] = []
-    //protected inventory : Items[]
+    protected inventory : Items[]
     
     private static _instace : GameManager | null = null;
 
@@ -64,5 +64,13 @@ export default class GameManager{
         }
         console.log(this.characters[1]._currentHitPoint)
         console.log('suceed !')
+    }
+
+    private addItem(newItem : Item) {
+        this.inventory.forEach(item => {
+            if (item.name === newItem.name) {
+                item.quantity = item.quantity + 1
+            }
+        });
     }
 }

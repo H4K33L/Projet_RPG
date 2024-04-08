@@ -29,7 +29,7 @@ Special : None.
 |  ___  |   HP : 200
 |>{o o}<|   Speed : 50
 | \ | / |   Kinetic Strique : 35
-  (o-o)      KAC : 25 | EAC : 0
+  (o-o)     KAC : 25 | EAC : 0
    V V    
 
 Special : an AOE attack.

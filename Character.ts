@@ -45,6 +45,7 @@ export default abstract class Character {
         this.currentHitPoint = maximumHitPoint
         this._alive = true
         this._emoji = emoji
+        this._actionValue = Math.round(10000/this.speed)
     }
 
     public arm(value : number, type : string){
