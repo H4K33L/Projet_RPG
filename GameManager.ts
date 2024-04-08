@@ -8,7 +8,7 @@ import BioIngener from "./classes/BioIngener.ts";
 import Character from "./Character.ts";
 
 export default class GameManager{
-    protected characters : Character[]
+    protected characters : Character[] = []
     //protected inventory : Items[]
     
     private static _instace : GameManager | null = null;
@@ -25,9 +25,9 @@ export default class GameManager{
     public startGame() {
         // need to be improved
         let count = 0
-        let temp : Character[] = []
+        const temp : Character[] = []
         while(count < 3) {
-            let userResponse = prompt("1=TechnoMage\n2=SpaceSoldier\n3=Solarblade\n4=Secretagent\n5=Primitivewarior\n6=BioIngener\nchoice caracter : ")
+            const userResponse = prompt("1=TechnoMage\n2=SpaceSoldier\n3=Solarblade\n4=Secretagent\n5=Primitivewarior\n6=BioIngener\nchoice caracter : ")
             if(userResponse === '1'){
                 temp.push(new TechnoMage())
                 console.log(temp[count].emoji)
