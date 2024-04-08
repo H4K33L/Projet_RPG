@@ -1,14 +1,23 @@
 import Character from "./Character.ts";
 export default class item {
-    heal: number; // pourcentage de heal = 20
-    quantity: number;
-    rez: number;
-    healType: string;
-    healMana : number;
-    // useVerification: boolean; faire fonction de use
-    name: string
+    private heal: number; // pourcentage de heal = 20
+    private quantity: number;
+    private rez: number;
+    private healType: string;
+    private healMana : number;
+    private name: string
 
-    constructor(heal: number, quantity: number, rez : number, healType: string,healMana:number, name: string) {
+    public get _quantity () {
+        return this._quantity
+    }
+
+    public set _quantity (quantity){
+            this._quantity = quantity
+
+
+    }
+
+    protected constructor(heal: number, quantity: number, rez : number, healType: string,healMana:number, name: string) {
         this.heal = heal;
         this.quantity = quantity
         this.rez = rez

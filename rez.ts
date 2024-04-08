@@ -2,17 +2,17 @@ import items from "./items.ts";
 import Character from "./Character.ts";
 export default class rez extends items {
 
-    constructor(heal: number, quantity: number, rez: number, healType: string,healMana:number, name: string){
+    public constructor(heal: number, quantity: number, rez: number, healType: string,healMana:number, name: string){
         super(heal,quantity,rez,healType,healMana,name);
     }
 
 
 
-    useRez(rez: number, character: Character) {
+    public useRez(rez: number, character: Character) {
         character.rez(rez)
     }
 
-    useHeal(heal: number, character: Character) {
+    public useHeal(heal: number, character: Character) {
         character.heal(heal)
     } 
 }

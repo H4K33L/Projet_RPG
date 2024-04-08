@@ -2,11 +2,11 @@ import items from "./items.ts";
 import Character from "./Character.ts";
 export default class healer extends items {
 
-    constructor(heal: number, quantity: number, rez: number, healType: string,healMana:number, name: string){
+    public constructor(heal: number, quantity: number, rez: number, healType: string,healMana:number, name: string){
         super(heal,quantity,rez,healType,healMana,name);
     }
 
-    useHeal(heal: number, character: Character) {
+    public useHeal(heal: number, character: Character) {
         character.heal(heal)
     }
 }
