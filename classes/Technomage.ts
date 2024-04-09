@@ -1,5 +1,5 @@
-import Character from "../Character.ts"
-import Special from "../Special.ts"
+import Character from "../character/Character.ts"
+import Special from "../character/Special.ts"
 
 export default class TechnoMage extends Character implements Special{
     protected currentQuantum : number

@@ -1,4 +1,4 @@
-import Character from "../Character.ts";
+import Character from "../character/Character.ts";
 
 export default class Lost extends Character{
     constructor(){

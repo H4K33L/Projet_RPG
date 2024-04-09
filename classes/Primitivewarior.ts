@@ -1,5 +1,5 @@
-import Character from "../Character.ts"
-import Special from "../Special.ts"
+import Character from "../character/Character.ts"
+import Special from "../character/Special.ts"
 
 export default class Primitivewarior extends Character implements Special{
     protected _AOESpecialAction : boolean
