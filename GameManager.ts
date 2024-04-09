@@ -14,7 +14,7 @@ import Character from "./character/Character.ts";
 
 export default class GameManager{
     protected characters : Character[] = []
-    protected inventory : Item[] = [new healer(50,2,"health","Potion 🧪"),new rez(50,1,20,"rez or heal","Morceau d'étoile ✨"),new rez(100,0,100,"rez or heal","Demi-étoile 🌟"),new mana(1,"mana",30,"Ether 💊")]
+    public inventory : Item[] = [new healer(50,2,"health","Potion 🧪"),new rez(50,1,20,"rez or heal","Morceau d'étoile ✨"),new rez(100,0,100,"rez or heal","Demi-étoile 🌟"),new mana(1,"mana",30,"Ether 💊")]
     
     private static _instace : GameManager | null = null;
 
@@ -74,6 +74,7 @@ export default class GameManager{
         console.log(this.characters[1]._currentHitPoint)
         this.inventory[1].use([this.characters[1]])
         console.log(this.characters[1]._currentHitPoint)
+        console.log(this.inventory)
         console.log('suceed !')
     }
 
