@@ -13,6 +13,6 @@ export default class healer extends Items {
         targets.forEach(character => {
             character.heal(this.heal)
         })
-        this._quantity = Math.min(0, this._quantity-1)
+        this._quantity = Math.max(0, this._quantity-1)
     }
 }

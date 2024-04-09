@@ -16,6 +16,6 @@ export default class quantum extends items {
                 character.recoverQuantum(this.healMana)
             }
         })
-        this._quantity = Math.min(0, this._quantity-1)
+        this._quantity = Math.max(0, this._quantity-1)
     }
 }

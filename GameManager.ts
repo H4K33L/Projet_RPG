@@ -72,7 +72,7 @@ export default class GameManager{
             console.log(this.inventory)
         }
         console.log(this.characters[1]._currentHitPoint)
-        this.inventory[1].use([this.characters[1]])
+        this.inventory[0].use([this.characters[1]])
         console.log(this.characters[1]._currentHitPoint)
         console.log(this.inventory)
         console.log('suceed !')
