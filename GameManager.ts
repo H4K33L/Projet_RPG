@@ -3,13 +3,12 @@ import rez from "./item/rez.ts"
 import healer from "./item/healer.ts"
 import mana from "./item/quantum.ts"
 
-import Character from "./character/Character.ts";
+import Character from "./character/Character.ts"
 
-import SelectCharcter from "./displays/SelectCharacter.ts";
+import SelectCharcter from "./displays/SelectCharacter.ts"
+import DisplayGameTitle from "./displays/DisplayGameTitle.ts"
 /*
-import TechnoMage from "./classes/Technomage.ts"
-import Secretagent from "./classes/SecretAgent.ts"
-import BioIngener from "./classes/BioIngener.ts"
+import Primitivewarior from "./classes/Primitivewarior.ts"
 */
 export default class GameManager{
     private _characters : Character[] = []
@@ -32,28 +31,18 @@ export default class GameManager{
 
     private constructor() {}
 
-    public async startGame() {
-        const characterSelection = new SelectCharcter()
-        await characterSelection.choseCharacters()
-
-        /*
-        if(this.characters[0] instanceof TechnoMage){
-            this.characters[0].specialAction([this.characters[1]])
+    public startGame() {
+        new DisplayGameTitle
+        const selection = async () => {
+            await new SelectCharcter().choseCharacters()
+            /*
+            if (this.characters[2] instanceof Primitivewarior){
+                this.characters[2].specialAction([this.characters[2]])
+            }
+            console.log(this.characters[2].currentHitPoint)
+            */
         }
-        console.log(this.characters[1].currentHitPoint)
-        if(this.characters[1] instanceof BioIngener){
-            this.characters[1].specialAction([this.characters[1]])
-        }
-        if(this.characters[2] instanceof Secretagent){
-            this.characters[2].specialAction()
-            console.log(this.inventory)
-        }
-        console.log(this.characters[1].currentHitPoint)
-        this.inventory[0].use([this.characters[1]])
-        console.log(this.characters[1].currentHitPoint)
-        console.log(this.inventory)
-        console.log('suceed !')
-        */
+        setTimeout(selection, 5000)
     }
 
     public addItem(name : string) {
