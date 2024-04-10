@@ -24,6 +24,6 @@ export default class TechnoMage extends Character implements Special{
     }
 
     recoverQuantum(percent : number){
-        this.currentHitPoint = Math.min(this.maximumQantum, this.currentQuantum + (this.maximumQantum*(percent/100)))
+        this.currentQuantum = Math.min(this.maximumQantum, this.currentQuantum + (this.maximumQantum*(percent/100)))
     }
 }
