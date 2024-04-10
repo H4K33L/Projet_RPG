@@ -1,3 +1,5 @@
+import { Carac } from "./display.ts"
+
 export class Perso {
     speed : number
     name : string
@@ -9,40 +11,55 @@ export class Perso {
         this.AV()
     }
 
-    AV() {
+    AV = () => {
         this.actionValue = Math.round(10000/this.speed)
     }
 }
 
 export class TurnOrder {
-    carac : Perso[]
-    order : Perso[]
-    constructor(carac : Perso[]) {
+    carac : Carac[]
+    constructor(carac : Carac[]) {
         this.carac = carac
-        this.order = this.tri()
+        this.tri()
     }
 
     Display() {
-        this.tri()
-        for (let i of this.carac) {
-            console.log(i)
+        for (const i of this.carac) {
+            console.log(`${i.name} s :${i.speed}, av : ${i.actionValue}`)
         }
     }
 
+    NextAction() {
+        //const nextAction = new Carac("J",100,"",100)
+        const nextAction = new Carac([],0,"",0)
+        
+        Object.assign(nextAction,this.carac[0])
+        nextAction.AV()
+        nextAction.actionValue *= 2
+        this.carac.push(nextAction)
+        this.tri()
+    }
 
-    Action() : boolean {
-        this.isAlive()
-        let base = this.carac[0].actionValue
-        for (let i of this.carac) {
-            i.actionValue -= base
+    Action(allCarac : Carac[]) : boolean {
+        if (this.carac.length == allCarac.length+1) {
+            this.carac = this.carac.slice(1)
         }
-        this.carac[0].AV()
-        this.carac.push(this.carac[0])
-        this.carac = this.carac.splice(1)
+        this.isAlive()
+        const base = this.carac[0].actionValue
+        const av = this.carac.slice(1)
+
+        for (const i of av) {
+            i.actionValue = Math.max(0,i.actionValue-base)
+        }
+        this.preventEqualAV()
+        this.carac[0].actionValue = 0
+        this.carac = this.carac.slice(0,1).concat(av)
+        this.NextAction()
         return true
     }
+
     tri = (s = this.carac) => {
-        let c : Perso
+        let c : Carac
         for (let i = 0; i < s.length-1; i++) {
             let min = s[i].actionValue
             let id = i
@@ -60,24 +77,22 @@ export class TurnOrder {
     }
 
     isAlive() {
-        for (let i of this.carac) {
+        for (const i of this.carac) {
             if (!i.alive) {
                 this.carac.splice(this.carac.indexOf(i),1)
             }
         }
     }
+
+    preventEqualAV() {
+        let numbers : number[] = []
+        for (const i of this.carac) {
+            if (!numbers.includes(i.actionValue)) {
+                numbers.push(i.actionValue)
+            } else {
+                i.actionValue++
+                numbers.push(i.actionValue)
+            }
+        }
+    }
 }
-/*
-const zombie = new Perso("zombie",50)
-const squell = new Perso("squel",100)
-const heros = new Perso("Heros",130)
-
-const Game = new TurnOrder([zombie,squell,heros])
-
-
-Game.Display()
-let a : boolean
-do {
-    a = Game.Action()
-} while (a)
-*/
