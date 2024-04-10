@@ -11,7 +11,7 @@ do {
 
 export class Menu {
     name : string
-    choices : Array<Menu> | Array<Carac>
+    choices : Menu[] | Carac[] | Menu
     des1 : string
     des2 : string
     des3 : string
@@ -19,7 +19,8 @@ export class Menu {
     enemy :  Array<Carac>
     turnOrder : TurnOrder
     action = 0
-    constructor(name : string,choices : Array<Menu> | Array<Carac>,d1 :string,d2 : string,d3 : string,team :  Array<Carac>,enemy :  Array<Carac>) {
+    bossNames = ["Young Star Dragon"]
+    constructor(name : string,choices : Array<Menu> | Array<Carac> | Menu,d1 :string,d2 : string,d3 : string,team :  Array<Carac>,enemy :  Array<Carac>) {
         this.name = name
         this.choices = choices
         this.des1 = d1
@@ -29,7 +30,7 @@ export class Menu {
         this.enemy = enemy
         this.turnOrder = new TurnOrder(this.team.concat(this.enemy))
     }
-    
+
     /*Display() {
         console.clear()
         const line = (n : number,str : string) => {
@@ -114,7 +115,7 @@ export class Menu {
         console.log(`└${line(52,"─")}┴${line(53,"─")}┴${line(52,"─")}┘`)
     }*/
 
-    Display2() {
+    Display() {
         console.clear()
         const fillList = (list : string[][] | string[],length : number) => {
             let newList : string[]
@@ -157,13 +158,13 @@ export class Menu {
             return emptyness + remainder + str + emptyness
         }
         const displayHP = (carac : Carac) => {
-            const hp = carac.hp
-            const hpmax = carac.hpmax
+            const hp = carac.hp*(100/carac.hpmax)
+            const hpmax = 100
             let hpBar = ""
-            for (let i = 0; i < Math.floor(hp/5); i++) {
+            for (let i = 0; i < Math.floor(hp*0.2); i++) {
                 hpBar += "\x1b[32m" + "█" + "\x1b[0m"
             }
-            for (let i = 0; i < Math.ceil((hpmax-hp)/5); i++) {
+            for (let i = 0; i < Math.ceil((100-hp)*0.2); i++) {
                 hpBar += "\x1b[31m" + "█" + "\x1b[0m"
             }
             hpBar += `${middle(12,`${carac.hp}/${carac.hpmax} 💗`)}`
@@ -181,20 +182,37 @@ export class Menu {
         }
         const team = (groupe : Carac[]) => {
             const displayTeam : string[][] = []
-            let str : string
             let perso : string[]
             for (const i of groupe) {
-                str = ""
-
                 perso = []
                 for (const f of i.emoji) {
-                    str = middle(34,f)
-                    perso.push(str)
+                    perso.push(middle(34,f))
                 }
                 perso = perso.concat(outline(displayHP(i),32))
                 displayTeam.push(perso)
             }
             return displayTeam
+        }
+        const boss = (boss : Carac) => {
+            const displayBoss : string[][] = []
+            let bossStr : string[] = []
+            for (let i = 0; i < 6; i++) {
+                bossStr.push(line(34," "))
+            }
+            bossStr.push(middle(34,boss.emoji[0]))
+            displayBoss.push(bossStr)
+            bossStr = []
+            for (let i = 1; i < 5;i++) {
+                bossStr.push(middle(34,boss.emoji[i]))
+            }
+            bossStr = bossStr.concat(outline(displayHP(boss),32))
+            displayBoss.push(bossStr)
+            bossStr = []
+            for (let i = 0; i < 7; i++) {
+                bossStr.push(line(34," "))
+            }
+            displayBoss.push(bossStr)
+            return displayBoss
         }
         const orderStr = fillList(order(),7)
         let newOrder : string[] = []
@@ -203,8 +221,16 @@ export class Menu {
                 newOrder = newOrder.concat(f)
             }
         }
-        const teamStr = fillList(team(this.team),3)
-        const enemyStr = fillList(team(this.enemy),3)
+        let enemyStr : string[][]
+        if (this.enemy.length != 1) {
+            enemyStr = fillList(team(this.enemy),3)
+        } else if (this.bossNames.includes(enemy[0].name)) {
+            enemyStr = boss(enemy[0])
+        } else {
+            enemyStr = fillList(team(this.enemy),3)
+        }
+        const teamStr = team(this.team)
+        fillList(team(this.enemy),3)
         let str : string
         console.log(`┌${line(149,"─")}┐`)
         for (let i = 0; i < 3;i++) {
@@ -223,8 +249,8 @@ export class Menu {
                 }
                 str += line(9," ")
                 str += teamStr[i][f]
-                str += line(49," ") + enemyStr[i][f]
-                console.log(`│${str}│`)
+                str += line(40," ") + enemyStr[i][f]
+                console.log(`│${str}${line(9," ")}│`)
             }
         }
         console.log(`├${line(49,"─")}┬${line(49,"─")}┬${line(49,"─")}┤`)
@@ -264,7 +290,7 @@ export class Menu {
             this.turnOrder.Action(this.team.concat(this.enemy))
             start = false
 
-            this.Display2()
+            this.Display()
 
             return
         } 
@@ -278,8 +304,7 @@ export class Menu {
         } else if (key == "return") {
             this.turnOrder.Action(this.team.concat(this.enemy))
         }
-
-        this.Display2()
+        this.Display()
     }
     
 
@@ -327,17 +352,16 @@ const ninja = new Carac([" ☺ ~","/|\\ ","=== ","    "],100,"ninja",120)
 const elfe = new Carac(["+-+Ξ","|☺| "," ♥  ","/ \\ "],100,"elfe",150)
 const vampire = new Carac([" \\_/"," (☺)","=*#*"," /| "],100,"vampire",130)
 const roi = new Carac([" __ ","(oo)","|O \\","\\__/"],100,"roi",90)
-const orc = new Carac(["    ","  ☺ ","#*"," // "],100,"orc",10)
+const orc = new Carac(["    ","  ☺ ","  #*"," // "],100,"orc",10)
+const boss = new Carac(["|  ___  |","|>{o o}<|","| \\ | / |","  (o-o) ","   V V   "],200,"Young Star Dragon",50)
 const team = [elfe,mage,ninja]
-const enemy = [roi,orc]
+const enemy = [boss]
 
 const Attaque = new Menu("Attaque ⚔️",enemy,String(vampire.hp),String(roi.hp),String(orc.hp),team,enemy)
 
 const menu = new Menu("Menu",[Attaque,Attaque,Attaque],"Choix de l'item","Description de l'attaque","Description de l'attaque",team,enemy)
 
-mage.hp -= 40
+boss.hp -= 80
 while (true) {
     await menu.Action()
-    menu.Display2()
-
 }
