@@ -5,10 +5,10 @@ export default abstract class Character {
     protected EAC : number
     protected speed : number
     protected readonly maximumHitPoint : number
-    protected currentHitPoint : number
+    protected _currentHitPoint : number
     //
-    public get _currentHitPoint() {
-        return this.currentHitPoint
+    public get currentHitPoint() {
+        return this._currentHitPoint
     }
     //
     protected _name : string
@@ -42,7 +42,7 @@ export default abstract class Character {
         this.EAC = EAC
         this.speed = speed
         this.maximumHitPoint = maximumHitPoint
-        this.currentHitPoint = maximumHitPoint
+        this._currentHitPoint = maximumHitPoint
         this._alive = true
         this._emoji = emoji
         this._actionValue = Math.round(10000/this.speed)
@@ -50,9 +50,9 @@ export default abstract class Character {
 
     public arm(value : number, type : string){
         if (type === "K") {
-            this.currentHitPoint = Math.max(0, this.currentHitPoint - Math.max(0, value - this.KAC))
+            this._currentHitPoint = Math.max(0, this.currentHitPoint - Math.max(0, value - this.KAC))
         } else {
-            this.currentHitPoint = Math.max(0, this.currentHitPoint - Math.max(0, value - this.EAC))
+            this._currentHitPoint = Math.max(0, this.currentHitPoint - Math.max(0, value - this.EAC))
         }
         if (this.currentHitPoint === 0){
             this._alive = false
@@ -61,13 +61,13 @@ export default abstract class Character {
 
     public heal(percent : number){
         if (this._alive === true){
-            this.currentHitPoint = Math.min(this.maximumHitPoint, this.currentHitPoint + (this.maximumHitPoint*(percent/100)))
+            this._currentHitPoint = Math.min(this.maximumHitPoint, this.currentHitPoint + (this.maximumHitPoint*(percent/100)))
         }
     }
 
     public rez(percent : number){
         if (this._alive === false){
-            this.currentHitPoint = Math.min(this.maximumHitPoint, this.currentHitPoint + (this.maximumHitPoint*(percent/100)))
+            this._currentHitPoint = Math.min(this.maximumHitPoint, this.currentHitPoint + (this.maximumHitPoint*(percent/100)))
         }
     }
 
