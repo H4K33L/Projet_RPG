@@ -1,5 +1,5 @@
-import Character from "../Character";
-import Special from "../Special";
+import Character from "../character/Character.ts";
+import Special from "../character/Special.ts";
 
 export default class YoungStarDragon extends Character implements Special{
     constructor(){
