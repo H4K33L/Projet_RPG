@@ -29,8 +29,8 @@ export class Menu {
         this.enemy = enemy
         this.turnOrder = new TurnOrder(this.team.concat(this.enemy))
     }
-
-    Display() {
+    
+    /*Display() {
         console.clear()
         const line = (n : number,str : string) => {
             let result = ""
@@ -112,11 +112,31 @@ export class Menu {
         console.log(`│  ${midleft}${line(46," ")}${midleft}  │  ${midmid}${line(47," ")}${midmid}  │  ${midright}${line(46," ")}${midright}  │`)    
         console.log(`│  ${botleft}  │  ${botmid}  │  ${botright}  │`)
         console.log(`└${line(52,"─")}┴${line(53,"─")}┴${line(52,"─")}┘`)
-        console.log(this.turnOrder.carac)
-    }
+    }*/
 
     Display2() {
         console.clear()
+        const fillList = (list : string[][] | string[],length : number) => {
+            let newList : string[]
+            if (typeof list[0] == "object") {
+                if (list.length < length) {
+                    for (let i = list.length; i < length; i++) {
+                        newList = []
+                        for (let f of list[0]) {
+                            newList.push(line(list[0][0].length," "))
+                        }
+                        list.push(newList)
+                    }
+                }
+            } else {
+                if (list.length < length) {
+                    for (let i = list.length; i < length; i++) {
+                        list.push(line(list[0].length," "))
+                    }
+                }
+            }
+            return list
+        }
         const line = (n : number,str : string) => {
             let result = ""
             for (let i = 0; i < n; i++) {
@@ -176,18 +196,19 @@ export class Menu {
             }
             return displayTeam
         }
-        const orderStr = order()
+        const orderStr = fillList(order(),7)
         let newOrder : string[] = []
         for (const i of orderStr) {
             for (const f of i) {
                 newOrder = newOrder.concat(f)
             }
         }
-        const teamStr = team(this.team)
-        const enemyStr = team(this.enemy)
+        const teamStr = fillList(team(this.team),3)
+        const enemyStr = fillList(team(this.enemy),3)
         let str : string
+        console.log(`┌${line(149,"─")}┐`)
         for (let i = 0; i < 3;i++) {
-            for (let f = 0;f < 8;f++) {
+            for (let f = 0;f < 7;f++) {
                 str = ""
                 let a = 0
                 if (teamStr.length > enemyStr.length) {
@@ -200,26 +221,43 @@ export class Menu {
                 } else {
                     str += newOrder[i*a+f]
                 }
-                str += line(5," ")
-                if (i >= teamStr.length) {
-                    str += line(35," ")
-                } else if (f >= teamStr[i].length) {
-                    str += line(35," ")
-                } else {
-                    str += teamStr[i][f]
-                }
-                if (i >= enemyStr.length) {
-                    str += ""
-                } else if (f >= enemyStr[i].length) {
-                    str += ""
-                } else {
-                    str += line(10," ") + enemyStr[i][f]
-                }
-                console.log(str)
-
+                str += line(9," ")
+                str += teamStr[i][f]
+                str += line(49," ") + enemyStr[i][f]
+                console.log(`│${str}│`)
             }
         }
-        console.log("hello")
+        console.log(`├${line(49,"─")}┬${line(49,"─")}┬${line(49,"─")}┤`)
+        let [topleft,topmid,topright] = [line(45," "),line(45," "),line(45," ")]
+        let [midleft,midmid,midright] = [" "," "," "]
+        let [botleft,botmid,botright] = [line(45," "),line(45," "),line(45," ")]
+        switch (this.action) {
+            case 0 :{
+                topleft = `┌${line(43,"─")}┐`
+                midleft = "│"
+                botleft = `└${line(43,"─")}┘`
+                break
+            }
+            case 1 :{
+                topmid = `┌${line(43,"─")}┐`
+                midmid = "│"
+                botmid = `└${line(43,"─")}┘`
+                break
+            }
+            case 2 :{
+                topright = `┌${line(43,"─")}┐`
+                midright = "│"
+                botright = `└${line(43,"─")}┘`
+                break
+            }
+        }
+        console.log(`│  ${topleft}  │  ${topmid}  │  ${topright}  │`)
+        console.log(`│  ${midleft}${middle(43,this.choices[0].name)}${midleft}  │  ${midmid}${middle(43,this.choices[1].name)}${midmid}  │  ${midright}${middle(43,this.choices[2].name)}${midright}  │`)
+        console.log(`│  ${midleft}${line(43," ")}${midleft}  │  ${midmid}${line(43," ")}${midmid}  │  ${midright}${line(43," ")}${midright}  │`)
+        console.log(`│  ${midleft}${middle(43,this.des1)}${midleft}  │  ${midmid}${middle(43,this.des2)}${midmid}  │  ${midright}${middle(43,this.des3)}${midright}  │`)
+        console.log(`│  ${midleft}${line(43," ")}${midleft}  │  ${midmid}${line(43," ")}${midmid}  │  ${midright}${line(43," ")}${midright}  │`)    
+        console.log(`│  ${botleft}  │  ${botmid}  │  ${botright}  │`)
+        console.log(`└${line(49,"─")}┴${line(49,"─")}┴${line(49,"─")}┘`)
     }
     Action = async () => {
         if (start) {
@@ -284,14 +322,14 @@ export class Carac {
     }
 }
 
-const mage = new Carac(["\\_\\ ","(°°)","┻┳═一","|  |"],100,"Primitive-Warrior",100)
+const mage = new Carac(["\\_\\ ","(°°)","╧╤═▬","|  |"],100,"Primitive-Warrior",100)
 const ninja = new Carac([" ☺ ~","/|\\ ","=== ","    "],100,"ninja",120)
 const elfe = new Carac(["+-+Ξ","|☺| "," ♥  ","/ \\ "],100,"elfe",150)
 const vampire = new Carac([" \\_/"," (☺)","=*#*"," /| "],100,"vampire",130)
 const roi = new Carac([" __ ","(oo)","|O \\","\\__/"],100,"roi",90)
-const orc = new Carac(["    ","  ☺ ","  #*"," // "],100,"orc",10)
-const team = [mage,ninja,elfe]
-const enemy = [vampire]
+const orc = new Carac(["    ","  ☺ ","#*"," // "],100,"orc",10)
+const team = [elfe,mage,ninja]
+const enemy = [roi,orc]
 
 const Attaque = new Menu("Attaque ⚔️",enemy,String(vampire.hp),String(roi.hp),String(orc.hp),team,enemy)
 
