@@ -25,9 +25,8 @@
 
 import item from "./item/item.ts";
 import Character from "./character/Character.ts";
-
 import GameManager from "./GameManager";
-class chest {
+export default class chest {
 
     constructor() {
         const rand = Math.floor(Math.random() * (100 - 0 + 1) + 0)
@@ -99,13 +98,5 @@ class chest {
                 console.log(line)
             });
         }
+        
     }
-  
-
-
-
-console.log(`you have gain ${item} and ${item}`)
-
-/**  
- * puis afficher un récapitulatif des objets gagner 
-*/
