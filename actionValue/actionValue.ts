@@ -1,10 +1,13 @@
 import Character from "../character/Character.ts"
+
 export class TurnOrder {
     carac : Character[]
+    
     constructor(carac : Character[]) {
         this.carac = carac
         this.tri()
     }
+
     NextAction() {
         //const nextAction = new Carac("J",100,"",100)
         const nextAction = this.carac[0].deepCopy()
@@ -48,6 +51,7 @@ export class TurnOrder {
         }
         return s
     }
+
     preventEqualAV() {
         const numbers : number[] = []
         for (const i of this.carac) {

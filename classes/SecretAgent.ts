@@ -9,7 +9,7 @@ export default class Secretagent extends Character implements Special{
     }
 
     constructor(){
-        super('Secret Agent',20,0,0,0,130,60,["⣿⡟⢻⣿","⣿⠁⠁⢻","⣿⡆⠀⣿","⣿⢠⡇⢿"])
+        super('Secret Agent',25,0,20,0,130,60,["⣿⡟⢻⣿","⣿⠁⠁⢻","⣿⡆⠀⣿","⣿⢠⡇⢿"])
         this._AOESpecialAction = true
     }
 

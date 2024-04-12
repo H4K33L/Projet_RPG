@@ -1,14 +1,10 @@
 import Character from "../character/Character.ts"
-import Use from "./use.ts"
 
-export default abstract class Item implements Use {
+export default abstract class Item {
     protected useType: string
     protected _name: string
     public get name () {
         return this._name
-    }
-    public set name (input){
-            this._name = input
     }
 
     protected _quantity: number
@@ -25,5 +21,5 @@ export default abstract class Item implements Use {
         this._name = name
     }
 
-    use(targets: Character[]): void {targets}
+    abstract use(targets: Character[]): void 
 }

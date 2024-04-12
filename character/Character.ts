@@ -7,16 +7,11 @@ export default abstract class Character {
     protected speed : number
     protected readonly maximumHitPoint : number
     protected currentHitPoint : number
-    //
-    protected abstract _AOESpecialAction : boolean
-    public get AOESpecialAction() {
-        return this._AOESpecialAction
-    }
 
     public get _currentHitPoint() {
         return this.currentHitPoint
     }
-    //
+    
     public get _maximumHitPoint() {
         return this.maximumHitPoint
     }
@@ -33,7 +28,7 @@ export default abstract class Character {
         return this._emoji
     }
     
-    private _actionValue : number
+    private _actionValue : number = 0
     public get actionValue() {
         return this._actionValue
     }
@@ -54,7 +49,7 @@ export default abstract class Character {
         this.currentHitPoint = maximumHitPoint
         this._alive = true
         this._emoji = emoji
-        this._actionValue = Math.round(10000/this.speed)
+        this.AV()
     }
 
     public arm(value : number, type : string){
@@ -91,5 +86,4 @@ export default abstract class Character {
     }
 
     public abstract deepCopy() : Character
-    public abstract specialAction(targets : Character[]) : void
 }

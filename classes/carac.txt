@@ -2,7 +2,7 @@
 
 \_\   HP : 100
 (°°)  Speed : 100
-|╦̵̵̿╤─  Kinetic Strique : 25
+|╦̵̵̿╤─  Kinetic Strique : 35
 \/\/  KAC : 25 | EAC : 0
 
 Special : none
@@ -11,7 +11,7 @@ Special : none
 
  ☼   HP : 60
 _☺_  Speed : 50
-|:=¤ Kinetic Strique : 10
+|:=¤ Kinetic Strique : 20
 /:\   KAC : 10 | EAC : 30
 
 Special : can use Quantum to make Energetical Strique.
@@ -22,7 +22,7 @@ Special : can use Quantum to make Energetical Strique.
 
   ║   HP : 100
 ☺ ║   Speed : 80
-♦=╞┐ Kinetic Strique : 20
+♦=╞┐ Kinetic Strique : 30
 |\    KAC : 30 | EAC : 0
 
 Special : deal 8 damage to all enemies.
@@ -31,7 +31,7 @@ Special : deal 8 damage to all enemies.
 
 +-+𐃈  HP : 100
 |☺|    Speed : 75
- ♥     Kinetic Strique : 30
+ ♥     Kinetic Strique : 40
 / \   KAC : 15 | EAC : 0
 
 Special : execute an atack on one of the enemies 
@@ -42,7 +42,7 @@ Special : execute an atack on one of the enemies
 
       HP : 60
  ☺ ~  Speed : 50
-/|\   Kinetic Strique : 15
+/|\   Kinetic Strique : 25
 ===   KAC : 10 | EAC : 10
 
 Special : He can heal 25% HP to anyone.
@@ -51,7 +51,7 @@ Special : He can heal 25% HP to anyone.
 
 ⣿⡟⢻⣿  HP : 60
 ⣿⠁⠁⢻  Speed : 130
-⣿⡆⠀⣿  Kinetic Strique : 20
+⣿⡆⠀⣿  Kinetic Strique : 25
 ⣿⢠⡇⢿  KAC : 20 | EAC : 0
 
 Special : he/she can steal an object :

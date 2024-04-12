@@ -12,24 +12,30 @@ Special : None.
  __     HP : 75
 (oo)    Speed : 30
 |O \    Kinetic Strique : 20
-\__/    KAC : 25 | EAC : 0
+\__/    KAC : 10 | EAC : 0
 
 Special : None.
 ----------------------------
 #### Cyber-Zomby
-      HP : 150
+      HP : 100
   ☺    Speed : 20
-  #*    Kinet Strique : 30
- //     KAC : 10 | EAC : 0
+  #*    Kinetic Strique : 20
+ //     KAC : 0 | EAC : 0
 
 Special : None.
+----------------------------
+#### Smourbif
+{~~} HP : 75
+(YY) Speed : 35
+~**~ Kinetic strique : 10
+)--( KAC : 5 | EAC : 0
 ----------------------------
 #### Young Star Dragon
 
 |  ___  |   HP : 200
 |>{o o}<|   Speed : 50
-| \ | / |   Kinetic Strique : 35
-  (o-o)     KAC : 25 | EAC : 0
+| \ | / |   Kinetic Strique : 30
+  (o-o)     KAC : 20 | EAC : 0
    V V    
 
 Special : an AOE attack.

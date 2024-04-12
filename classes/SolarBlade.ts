@@ -8,7 +8,7 @@ export default class Solarblade extends Character implements Special{
     }
 
     constructor(){
-        super('Solarblade',20,0,0,0,80,100,["  ║ ","☺ ║ ","♦=╞┐","|\\  "])
+        super('Solarblade',30,0,30,0,80,100,["  ║ ","☺ ║ ","♦=╞┐","|\\  "])
         this._AOESpecialAction = true
     }
 

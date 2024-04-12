@@ -8,7 +8,7 @@ export default class Primitivewarior extends Character implements Special{
     }
 
     constructor(){
-        super('Primitive-Warior',30,0,0,0,75,100,["+-+Ξ","|☺| "," ♥  ","/ \\ "])
+        super('Primitive-Warior',40,0,15,0,75,100,["+-+Ξ","|☺| "," ♥  ","/ \\ "])
         this._AOESpecialAction = false
     }
 

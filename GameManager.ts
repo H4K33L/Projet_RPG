@@ -10,8 +10,6 @@ import DisplayGameTitle from "./displays/DisplayGameTitle.ts"
 
 import Chest from "./chest/chest.ts"
 import CyberZomby from "./monsters/CyberZomby.ts";
-import Lost from "./monsters/Lost.ts";
-import SpaceGoblin from "./monsters/SpaceGoblin.ts";
 import Fight from "./Fight.ts";
 
 /**
@@ -45,8 +43,6 @@ export default class GameManager{
         return this._instace
     }
 
-    private constructor() {}
-
     /**
      * this method Start the game.
      * printing the game title and make the player chose is team.
@@ -65,12 +61,11 @@ export default class GameManager{
         await this.timeout(2000)
         await new SelectCharcter().choseCharacters()
         await this.timeout(2000)
-        enemies = [new CyberZomby()]
+        enemies = [new CyberZomby(),new CyberZomby(),new CyberZomby()]
         fight = new Fight("",["Items 💰","Special 🪄","Attaque ⚔️"],"Choix de l'item","Special Attaque","Description de l'attaque",this.characters,enemies)
         while (a) {
             a = await fight.Action()
         }
-        /*
         await this.timeout(2000)
         new Chest()
         await this.timeout(2000)
@@ -78,7 +73,6 @@ export default class GameManager{
         await this.timeout(1000)
         new Chest()
         await this.timeout(2000)
-        */
     }
 
     /**
