@@ -19,3 +19,6 @@ export default class quantum extends items {
         this._quantity = Math.max(0, this._quantity-1)
     }
 }
+
+// quantum = mana 
+// heal quantum pour le technomage 

@@ -17,18 +17,14 @@
  * - faire un message disant quel objets choisi pour ensuite le mettre dans un message disant ce qui a été obtenu
  */
 
- /**fonction rencontre mimique :
-  * - si mimic looter :
-  *   - autre loot annuler
-  *   - 15 dégat prit 
- */
+ 
 
 import item from "./item/item.ts";
 import Character from "./character/Character.ts";
 import GameManager from "./GameManager";
 export default class chest {
 
-    constructor() {
+    constructor() { // fonction randomisant l'apparition d'item dans le coffre avec differente % de chance de l'obtenir 
         const rand = Math.floor(Math.random() * (100 - 0 + 1) + 0)
         if (0 < rand && rand <= 40) {// 40% d'obtenir une potion
             GameManager.instance.addItem("Potion 🧪")
@@ -43,12 +39,13 @@ export default class chest {
             GameManager.instance.addItem("Demi-étoile 🌟")
             this.chest()
         } else if (90 < rand && rand <= 100) {// 10% d'obtenir une attaque de mimic
-            GameManager.instance.characters.forEach(caracter => {
-                caracter.arm(15,"K")
+            GameManager.instance.characters.forEach(caracter => { // evenement rencontre mimic
+                caracter.arm(15,"K") // si mimit "looter" le character prend 15 de dégat physique 
             });
             this.mimic()
         }
     }
+
     chest() {
         const title = ["*******************************************************************************",
             "                          .=\"\"_;=.                                             ",
@@ -74,6 +71,7 @@ export default class chest {
             console.log(line)
         });
     }
+// ascii coffre avec des "\" pour les caractère spéciaux tel que les "" 
 
     mimic() {
         const title = ["*******************************************************************************",
@@ -100,3 +98,6 @@ export default class chest {
         }
         
     }
+
+    // ascii mimic
+

@@ -10,14 +10,18 @@ export default abstract class Item implements Use {
     public set name (input){
             this._name = input
     }
+    // set name car plusieur objets peuvent heal donc c'est mieux de les differencier
 
     protected _quantity: number
     public get quantity () {
         return this._quantity
     }
+    // quantity d'objets posseder 
+
     public set quantity (input){
             this._quantity = input
     }
+    //setup nombre d'objets posseder
 
     protected constructor(quantity: number, useType: string, name: string) {
         this._quantity = quantity

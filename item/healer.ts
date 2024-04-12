@@ -9,10 +9,12 @@ export default class healer extends Items {
         this.heal = heal
     }
 
-    use(targets: Character[]): void{
+    use(targets: Character[]): void{    
         targets.forEach(character => {
             character.heal(this.heal)
         })
         this._quantity = Math.max(0, this._quantity-1)
     }
 }
+
+// fonction de heal pour les item tel que la potion ou les étoile si le character est pas mort 

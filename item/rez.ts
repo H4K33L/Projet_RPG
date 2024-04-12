@@ -22,3 +22,6 @@ export default class rez extends items {
         this._quantity = Math.max(0, this._quantity-1)
     }
 }
+
+
+// fonction if else qui heal si alive et rez si mort utile pour les fragment et demi étoiles
