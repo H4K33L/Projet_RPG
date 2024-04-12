@@ -7,9 +7,18 @@ import Character from "./character/Character.ts"
 
 import SelectCharcter from "./displays/SelectCharacter.ts"
 import DisplayGameTitle from "./displays/DisplayGameTitle.ts"
-/*
-import Primitivewarior from "./classes/Primitivewarior.ts"
-*/
+
+import Chest from "./chest/chest.ts"
+
+/**
+ * This class handel the whole game.
+ * 
+ * It has :
+ * - private  _ characters : array of Character, to represent the player team
+ *   getter and setter for it propreties
+ * - inventory : array of Item
+ * - instance
+ */
 export default class GameManager{
     private _characters : Character[] = []
     public get characters() {
@@ -22,6 +31,9 @@ export default class GameManager{
     
     private static _instace : GameManager | null = null;
 
+    /**
+     * This method is used to create a new instace or acces to a existing one.
+     */
     public static get instance() {
         if(this._instace === null){
             this._instace = new GameManager()
@@ -31,25 +43,45 @@ export default class GameManager{
 
     private constructor() {}
 
-    public startGame() {
+    /**
+     * this method Start the game.
+     * printing the game title and make the player chose is team.
+     * after that it launch the game loop : 
+     * - combat 1
+     * - chest
+     * - combat 2
+     * - chest
+     * - BOSS
+     */
+    public async startGame() {
         new DisplayGameTitle
-        const selection = async () => {
-            await new SelectCharcter().choseCharacters()
-            /*
-            if (this.characters[2] instanceof Primitivewarior){
-                this.characters[2].specialAction([this.characters[2]])
-            }
-            console.log(this.characters[2].currentHitPoint)
-            */
-        }
-        setTimeout(selection, 5000)
+        await this.timeout(2000)
+        await new SelectCharcter().choseCharacters()
+        await this.timeout(2000)
+        new Chest()
+        await this.timeout(1000)
+        new Chest()
     }
 
+    /**
+     * This method add an item in the inventory.
+     * The item name must be given in param.
+     * @param name the name of the item add to the inventory.
+     */
     public addItem(name : string) {
         this.inventory.forEach(item => {
             if (item.name === name) {
                 item.quantity = item.quantity + 1
             }
         });
+    }
+
+    /**
+     * This method is use to whait somme mili-sec.
+     * @param ms nomber of mili-sec to whait
+     * @returns the whait
+     */
+    private timeout (ms : number) {
+        return new Promise(res => setTimeout(res,ms));
     }
 }

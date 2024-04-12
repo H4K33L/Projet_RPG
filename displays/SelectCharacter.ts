@@ -11,11 +11,18 @@ import GameManager from "../GameManager.ts"
 
 import { readKeypress } from "https://deno.land/x/keypress@0.0.11/mod.ts"
 
+/**
+ * This class is used to chose the character who be part of the team
+ * during the game.
+ */
 export default class SelectCharcter {
     private userResponse : number = 1
     
     constructor() {}
 
+/**
+ * This method is used to interact whith the payer to chose te characters.
+ */
     public choseCharacters = async() => {
         console.clear()
         let count = 0
@@ -73,12 +80,21 @@ export default class SelectCharcter {
         GameManager.instance.characters = temp
     }
 
+/**
+ * This method is used to get the user entry (a keypress) and return it.
+ * @returns the user keypress
+ */
     private input = async () => {
         for await (const keypress of readKeypress()) {
             return keypress.key
         }
     }
 
+/**
+ * This method print the character selection, the method take an array of character in argument to add it
+ * in the sleection print. The selection have an arrow to help the player to see what character he is selectioning.
+ * @param characters the array of character selected by the player (posibli empty).
+ */
     private display = (characters : Character[]) => {
         console.log("┌─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────┐")
         console.log("│                     ┌────────────────────────────────────────────────────┬────────────────────────────────────────────────────┐                     │")

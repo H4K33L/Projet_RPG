@@ -1,5 +1,10 @@
+/**
+ * This class as a constructor who print
+ * the game title.
+ */
 export default class DisplayGameTitle{
     constructor() {
+        console.clear()
         const title = ["   ______ ______     ______  __   __",
                        "  /_  __//___   )   / ____/ / /  / /",
                        "   / /    __ ) /   / /_    / / /'/'",
@@ -10,9 +15,9 @@ export default class DisplayGameTitle{
                        "                        _______     _______",
                        "                       /  ___  \\   |  ____|",
                        "                       | /   \\  |  |  |_",
-                       "                       | \\   /  |  |   _|",
+                       "                       | \\___/  |  |   _|",
                        "                       \\_______/   |  |",
-                       "                                    |__|",
+                       "                                   |__|",
                        "                                   ____ _____      _______   ____",
                        "                                  / __//_  _/ ,/| /____   ) / __/",
                        "                                 ( (    / / ,/  |   __ ) / ( (",
