@@ -1,4 +1,4 @@
-import TechnoMage from "../classes/Technomage.ts"
+import TechnoMage from "../classes/TechnoMage.ts"
 import Character from "../character/Character.ts"
 
 import items from "./item.ts"
