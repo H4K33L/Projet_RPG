@@ -2,7 +2,7 @@ import TechnoMage from "../classes/TechnoMage.ts"
 import SpaceSoldier from "../classes/SpaceSoldier.ts"
 import Solarblade from "../classes/SolarBlade.ts"
 import Secretagent from "../classes/SecretAgent.ts"
-import Primitivewarior from "../classes/Primitivewarior.ts"
+import Primitivewarior from "../classes/PrimitiveWarrior.ts"
 import BioIngener from "../classes/BioIngener.ts"
 
 import Character from "../character/Character.ts"
@@ -107,12 +107,12 @@ export default class SelectCharcter {
         } else {
             console.log("│                     │               (°°)  Speed : 100                    │               ☺ ║   Speed : 80                     │                     │")
         }
-        console.log("│                     │               |╦̵̵̿╤─  Kinetic Strique : 25           │               ♦=╞┐ Kinetic Strique : 20            │                     │")
+        console.log("│                     │               ╧╤═▬  Kinetic Strique : 25           │               ♦=╞┐ Kinetic Strique : 20            │                     │")
         console.log("│                     │               \\/\\/  KAC : 25 | EAC : 0             │               |\\    KAC : 30 | EAC : 0             │                     │")
         console.log("│                     │Special : none                                      │Special : deal 8 damage to all enemies.             │                     │")
         console.log("│                     ├────────────────────────────────────────────────────┼────────────────────────────────────────────────────┤                     │")
         console.log("│                     │   ######            Technomage            ######   │   ######         Primitive-Warior         ######   │                     │")
-        console.log("│                     │                  ☼   HP : 60                       │                 +-+𐃈  HP : 100                     │                     │")
+        console.log("│                     │                  ☼   HP : 60                       │                 +-+Ξ  HP : 100                     │                     │")
         if (this.userResponse === 3) {
             console.log("│                 ==> │                 _☺_  Speed : 50                    │                 |☺|    Speed : 75                  │                     │")
         } else if (this.userResponse === 4) {
@@ -141,7 +141,7 @@ export default class SelectCharcter {
 
         const temp : string[][]= []
         characters.forEach(character => {
-            temp.push(character.emoji.split("\n"))
+            temp.push(character.emoji)
         });
         temp.length
         for (let j = 0 ; j < 4; j++) {

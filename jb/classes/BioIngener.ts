@@ -1,21 +1,26 @@
 import Character from "../character/Character.ts"
 import Special from "../character/Special.ts"
 
-export default class Primitivewarior extends Character implements Special{
+export default class BioIngener extends Character{
     protected _AOESpecialAction : boolean
+
     public get AOESpecialAction() {
         return this._AOESpecialAction
     }
 
+
     constructor(){
-        super('Primitive-Warior',30,0,15,0,75,100,'+-+𐃈\n|☺| \n ♥  \n/ \\ \n')
+        super('BioIngener',15,0,0,0,50,60,[" ☺ ~","/|\\ ","=== ","    "])
         this._AOESpecialAction = false
     }
 
     specialAction(targets : Character[]): void {
         targets.forEach(target => {
-            target.arm(this.kineticStrike*1.3,'K')
-            this.arm(this.maximumHitPoint*0.2,'E')
+            target.heal(25)
         })
+    }
+
+    public deepCopy(): Character {
+      return new BioIngener()
     }
 }
