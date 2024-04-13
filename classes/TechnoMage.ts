@@ -10,7 +10,7 @@ export default class TechnoMage extends Character implements Special{
     }
 
     constructor(){
-        super('Techno-Mage',10,30,0,0,50,60,[" ☼  ","_☺_ ","|:=¤","/:\\ "])
+        super('Techno-Mage',20,30,10,30,50,60,[" ☼  ","_☺_ ","|:=¤","/:\\ "])
         this.currentQuantum = 100
         this.maximumQantum = 100
         this._AOESpecialAction = false

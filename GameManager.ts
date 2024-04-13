@@ -12,6 +12,8 @@ import Chest from "./chest/chest.ts"
 import CyberZomby from "./monsters/CyberZomby.ts";
 import Lost from "./monsters/Lost.ts";
 import SpaceGoblin from "./monsters/SpaceGoblin.ts";
+import Smourbif from "./monsters/Smourbif.ts"
+import YoungStarDragon from "./monsters/YoungStarDragon.ts"
 import Fight from "./Fight.ts";
 
 /**
@@ -31,7 +33,7 @@ export default class GameManager{
     public set characters(newCharacter : Character[]){
         this._characters = newCharacter
     }
-    public inventory : Item[] = [new healer(50,2,"health","Potion 🧪"),new rez(50,1,20,"rez or heal","Morceau d'étoile ✨"),new rez(100,0,100,"rez or heal","Demi-étoile 🌟"),new mana(1,"mana",30,"Ether 💊")]
+    public inventory : Item[] = [new healer(50,2,"health","Potion 🧪"),new rez(50,1,20,"rez or heal","Morceau d'étoile 🌙"),new rez(100,0,100,"rez or heal","Demi-étoile 🌟"),new mana(1,"mana",30,"Ether 💊")]
     
     private static _instace : GameManager | null = null;
 
@@ -44,7 +46,8 @@ export default class GameManager{
         }
         return this._instace
     }
-
+    private enemies = [new CyberZomby(), new Lost(), new Smourbif(), new SpaceGoblin()]
+    
     private constructor() {}
 
     /**
@@ -59,26 +62,31 @@ export default class GameManager{
      */
     public async startGame() {
         let a = true
-        let enemies : Character[]
         let fight : Fight
         new DisplayGameTitle
         await this.timeout(2000)
         await new SelectCharcter().choseCharacters()
         await this.timeout(2000)
-        enemies = [new CyberZomby()]
-        fight = new Fight("",["Items 💰","Special 🪄","Attaque ⚔️"],"Choix de l'item","Special Attaque","Description de l'attaque",this.characters,enemies)
+        fight = new Fight("",["Items 💰","Special 🪄","Attaque ⚔️"],"Choix de l'item","Special Attaque","Description de l'attaque",this.characters,this.pickEnemies())
         while (a) {
             a = await fight.Action()
         }
-        /*
-        await this.timeout(2000)
-        new Chest()
-        await this.timeout(2000)
-
+        a = true
         await this.timeout(1000)
         new Chest()
         await this.timeout(2000)
-        */
+        fight = new Fight("",["Items 💰","Special 🪄","Attaque ⚔️"],"Choix de l'item","Special Attaque","Description de l'attaque",this.characters,this.pickEnemies())
+        while (a) {
+            a = await fight.Action()
+        }
+        a = true
+        await this.timeout(1000)
+        new Chest()
+        await this.timeout(2000)
+        fight = new Fight("",["Items 💰","Special 🪄","Attaque ⚔️"],"Choix de l'item","Special Attaque","Description de l'attaque",this.characters,[new YoungStarDragon()])
+        while (a) {
+            a = await fight.Action()
+        }
     }
 
     /**
@@ -99,7 +107,23 @@ export default class GameManager{
      * @param ms nomber of mili-sec to whait
      * @returns the whait
      */
-    private timeout (ms : number) {
+    public timeout (ms : number) {
         return new Promise(res => setTimeout(res,ms));
+    }
+
+    pickEnemies = () => {
+        let rng : number
+        let rngResult : number[] = []
+        const result : Character[] = []
+        this.enemies = this.enemies.map((i) => i.deepCopy())
+        while (result.length < 3) {
+            rng = Math.floor(Math.random()*4)
+            if (rngResult.includes(rng)) {
+                continue
+            }
+            result.push(this.enemies[rng])
+            rngResult.push(rng)
+        }
+        return result
     }
 }

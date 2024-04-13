@@ -1,7 +1,7 @@
 import Character from "../character/Character.ts"
 import Special from "../character/Special.ts"
 
-export default class BioIngener extends Character{
+export default class BioIngener extends Character implements Special{
     protected _AOESpecialAction : boolean
 
     public get AOESpecialAction() {
@@ -10,7 +10,7 @@ export default class BioIngener extends Character{
 
 
     constructor(){
-        super('BioIngener',15,0,0,0,50,60,[" ☺ ~","/|\\ ","=== ","    "])
+        super('BioIngener',25,0,10,10,50,60,[" ☺ ~","/|\\ ","=== ","    "])
         this._AOESpecialAction = false
     }
 

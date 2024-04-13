@@ -17,8 +17,6 @@ import { readKeypress } from "https://deno.land/x/keypress@0.0.11/mod.ts"
  */
 export default class SelectCharcter {
     private userResponse : number = 1
-    
-    constructor() {}
 
 /**
  * This method is used to interact whith the payer to chose te characters.
@@ -107,7 +105,7 @@ export default class SelectCharcter {
         } else {
             console.log("│                     │               (°°)  Speed : 100                    │               ☺ ║   Speed : 80                     │                     │")
         }
-        console.log("│                     │               ╧╤═▬  Kinetic Strique : 25           │               ♦=╞┐ Kinetic Strique : 20            │                     │")
+        console.log("│                     │               ╧╤═▬  Kinetic Strique : 35           │               ♦=╞┐ Kinetic Strique : 30            │                     │")
         console.log("│                     │               \\/\\/  KAC : 25 | EAC : 0             │               |\\    KAC : 30 | EAC : 0             │                     │")
         console.log("│                     │Special : none                                      │Special : deal 8 damage to all enemies.             │                     │")
         console.log("│                     ├────────────────────────────────────────────────────┼────────────────────────────────────────────────────┤                     │")
@@ -120,7 +118,7 @@ export default class SelectCharcter {
         } else {
             console.log("│                     │                 _☺_  Speed : 50                    │                 |☺|    Speed : 75                  │                     │")
         }
-        console.log("│                     │                 |:=¤ Kinetic Strique : 10          │                  ♥     Kinetic Strique : 30        │                     │")
+        console.log("│                     │                 |:=¤ Kinetic Strique : 20          │                  ♥     Kinetic Strique : 40        │                     │")
         console.log("│                     │                 /:\\   KAC : 10 | EAC : 30          │                 / \\   KAC : 15 | EAC : 0           │                     │")
         console.log("│                     │Special: can use Quantum to make Energetical Strique│Special : execute an atack deal 39 Kinetic Damages  │                     │")
         console.log("│                     │        Quantum : 100 | Energetical strique : 30    │but the Primitive Warior lose 20 HP                 │                     │")
@@ -134,7 +132,7 @@ export default class SelectCharcter {
         } else {
             console.log("│                     │                ☺ ~  Speed : 50                     │                 ⣿⠁⠁⢻  Speed : 130                  │                     │")
         }
-        console.log("│                     │               /|\\   Kinetic Strique : 15           │                 ⣿⡆⠀⣿  Kinetic Strique : 20         │                     │")
+        console.log("│                     │               /|\\   Kinetic Strique : 25           │                 ⣿⡆⠀⣿  Kinetic Strique : 25         │                     │")
         console.log("│                     │               ===   KAC : 10 | EAC : 10            │                 ⣿⢠⡇⢿  KAC : 20 | EAC : 0           │                     │")
         console.log("│                     │Special : He can heal 25% HP to anyone.             │Special : he/she can steal an object                │                     │")
         console.log("├─────────────────────┴──────────────────────────────┬─────────────────────┴──────────────────────────────┬─────────────────────┴─────────────────────┤")
