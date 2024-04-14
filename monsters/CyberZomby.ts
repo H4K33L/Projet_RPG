@@ -2,7 +2,7 @@ import Character from "../character/Character.ts";
 
 export default class CyberZomby extends Character{
 
-    constructor(){
+    constructor(){        
         super('Cyber-Zomby',20,0,0,0,20,100,["    ","  ☺ ","  #*"," // "])
     }
 

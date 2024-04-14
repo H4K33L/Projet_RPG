@@ -4,7 +4,8 @@ import Character from "./character/Character.ts";
 import SpaceSoldier from "./classes/SpaceSoldier.ts"
 import BioIngener from "./classes/BioIngener.ts"
 import GameManager from "./GameManager.ts"
-let start = true
+import Item from "./item/item.ts"
+
 /*let a : boolean |null
 do {
     a = Game.Action()
@@ -23,6 +24,8 @@ export default class Fight {
     turnOrder : TurnOrder
     action = 0
     bossNames = ["Young Star Dragon"]
+    itemPage = 0
+    start : boolean
     constructor(name : string,choices : string[],d1 :string,d2 : string,d3 : string,team :  Array<Character>,enemy :  Array<Character>) {
         this.name = name
         this.choices = choices
@@ -32,6 +35,7 @@ export default class Fight {
         this.team = team
         this.enemy = enemy
         this.turnOrder = new TurnOrder(this.team.concat(this.enemy))
+        this.start = true
     }
     middle = (space : number, str : string) => {
         let emptyness = ""
@@ -239,15 +243,24 @@ export default class Fight {
             this.DisplayFight()
             return true
         }
-        if (start) {
+        if (this.start) {
             this.turnOrder.Action(this.team.concat(this.enemy))
-            start = false
+            this.start = false
 
             this.DisplayFight()
 
             return true
         } 
         //if (this.presentInList(this.turnOrder.carac[0],this.enemy))
+        if (this.presentInList(this.turnOrder.carac[0],this.enemy)) {
+            await GameManager.instance.timeout(1000)
+            this.enemyAct()
+            this.DisplayFight()
+            await GameManager.instance.timeout(1000)
+            this.turnOrder.Action(this.team.concat(this.enemy))
+            this.DisplayFight()
+            return true
+        }
         const key = await this.input()
         if (key == "right" && this.action < 2) {
             this.action++
@@ -256,11 +269,7 @@ export default class Fight {
         } else if (key == "c") {
             Deno.exit()
         } else if (key == "return") {
-            if (this.presentInList(this.turnOrder.carac[0],this.team)) {
-                await this.teamAct(this.choices[this.action])
-            } else if (this.presentInList(this.turnOrder.carac[0],this.enemy)) {
-                this.enemyAct()
-            }
+            await this.teamAct(this.choices[this.action])
             this.turnOrder.Action(this.team.concat(this.enemy))
         }
         this.DisplayFight()
@@ -269,6 +278,7 @@ export default class Fight {
     }
     
     teamAct = async (input : string) => {
+        let item : Item
         let target : Character[]
         if (input == "Special 🪄" && !(this.turnOrder.carac[0] instanceof SpaceSoldier)) {
             if (this.turnOrder.carac[0].AOESpecialAction) {
@@ -280,18 +290,31 @@ export default class Fight {
         } else if (input == "Attaque ⚔️") {
             target = await this.chooseTarget(input)
             target[0].arm(this.turnOrder.carac[0].kineticStrike,"K")
-            }
+        } else if (input == "Items 💰") {
+            item = GameManager.instance.inventory[this.find(await this.chooseItem(),GameManager.instance.inventory)]
+            target = await this.chooseTarget(input)
+            item.use(target)
         }
+    }
 
     enemyAct = () => {
-        const rng = Math.random()*10
+        let rng = Math.random()*10
         let target : Character
         if (rng < 2) {
             target = this.findLowestHp()
         } else {
             target = GameManager.instance.characters[Math.floor(Math.random()*3)]
         }
-        target.arm(this.turnOrder.carac[0].kineticStrike,"K")
+        if (!this.bossNames.includes(this.turnOrder.carac[0].name)) {
+            target.arm(this.turnOrder.carac[0].kineticStrike,"K")
+        } else {
+            rng = Math.random()*10
+            if (rng < 7) {
+                target.arm(this.turnOrder.carac[0].kineticStrike,"K")
+            } else {
+                this.turnOrder.carac[0].specialAction(GameManager.instance.characters)
+            }
+        }
     }
 
     findLowestHp = () => {
@@ -312,9 +335,15 @@ export default class Fight {
         }
     }
 
-    find(target : Character,list : Character[]) {
+    find(target : Character | string,list  : Character[] | Item[]) {
+        let name : string
+        if (target instanceof Character) {
+            name = target.name
+        } else {
+            name = target
+        }
         for (let i = 0; i < list.length;i++) {
-            if (target.name == list[i].name) {
+            if (name == list[i].name) {
                 return i
             }
         }
@@ -337,7 +366,7 @@ export default class Fight {
         }
         let result : Character[]
         let listCharacters : Character[]
-        if (this.turnOrder.carac[0] instanceof BioIngener && input == "Special 🪄") {
+        if ((this.turnOrder.carac[0] instanceof BioIngener && input == "Special 🪄") || input == "Items 💰") {
             listCharacters = GameManager.instance.characters
         } else {
             listCharacters = this.enemy
@@ -373,6 +402,41 @@ export default class Fight {
         return result
     }
 
+    chooseItem = async () => {
+        let result : string
+        const saveChoices = this.choices
+        const saveDes = [this.des1,this.des2,this.des3]
+        const inventory = GameManager.instance.inventory
+        while (true) {
+            this.choices = ["Other Page"]
+            this.des1 = "go to the other items"
+            this.choices.push(inventory[this.itemPage].name)
+            this.choices.push(inventory[this.itemPage+1].name)
+            this.des2 = inventory[this.itemPage].useType + " : " + inventory[this.itemPage].quantity
+            this.des3 = inventory[this.itemPage+1].useType + " : " + inventory[this.itemPage+1].quantity
+            this.DisplayFight()
+            const key = await this.input()
+            if (key == "right" && this.action < 2) {
+                this.action++
+            } else if (key =="left" && this.action > 0) {
+                this.action--
+            } else if (key == "c") {
+                Deno.exit()
+            } else if (key == "return") {
+                if (this.choices[this.action] == "Other Page") {
+                    this.switchItemPage()
+                    continue
+                } else {
+                    result = this.choices[this.action]
+                    break
+                }
+            }
+        }
+        this.choices = saveChoices
+        this.des1 = saveDes[0],this.des2 = saveDes[1],this.des3 = saveDes[2]
+        return result        
+    }
+
     emptyList = () => {
         for (let i = 0; i < this.enemy.length;i++) {
             if (this.enemy[i]._currentHitPoint == 0) {
@@ -389,4 +453,12 @@ export default class Fight {
         }
         return true
     }
+    switchItemPage = () => {
+        if (this.itemPage == 0) {
+            this.itemPage = 2
+        } else if (this.itemPage == 2) {
+            this.itemPage = 0
+        }
+    }
+
 }

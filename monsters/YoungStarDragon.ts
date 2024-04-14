@@ -8,7 +8,7 @@ export default class YoungStarDragon extends Character implements Special{
 
     specialAction(targets: Character[]): void {
         targets.forEach(target => {
-            target.arm(this.kineticStrike*0.5,'K')
+            target.arm(this.kineticStrike*0.5,'E')
         })
     }
 
