@@ -119,6 +119,11 @@ export default class GameManager{
         return new Promise(res => setTimeout(res,ms));
     }
 
+    /**
+     * This method is used to 
+     * generate a random monster uncounter
+     * @returns The array of monster for the unconter.
+     */
     private pickEnemies = () => {
         let rng : number
         const rngResult : number[] = []
